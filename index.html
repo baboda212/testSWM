@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>팔당취수장</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    ul,
+    li {
+      list-style-type: none;
+    }
+    .container {
+      background-color: #101320;
+      background-image: url("img/background.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 1259px;
+      height: 1040px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .elecData {
+      position: absolute;
+      gap: 40px;
+      border: 1px solid rgba(158, 195, 255, 0.5);
+      border-radius: 5px;
+      display: flex;
+      padding: 20px;
+      background: rgba(0, 81, 242, 0.15);
+    }
+    .elecUse,
+    .elecAi {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .elecUseTitle,
+    .elecAiTitle {
+      color: #fff;
+    }
+    .elecUseData,
+    .elecAiData {
+      color: #00ffff;
+      padding: 5px 20px;
+      border: 1px solid #418ede;
+      background: rgba(0, 81, 242, 0.2);
+    }
+    .content1 {
+      position: relative;
+    }
+    .content2 {
+      position: relative;
+    }
+    .content3 {
+      position: relative;
+    }
+    .diagram1 {
+      position: absolute;
+      top: 90px;
+      left: 134px;
+    }
+    .diagram2 {
+      position: absolute;
+      top: 500px;
+      left: 134px;
+    }
+    .diagram3 {
+      position: absolute;
+      top: 800px;
+      left: 134px;
+    }
+    .distribution1 {
+      position: absolute;
+      top: 215px;
+      left: 36px;
+      width: 111px;
+      height: 153px;
+    }
+    .distribution2 {
+      position: absolute;
+      top: 530px;
+      left: 33px;
+      width: 111px;
+      height: 153px;
+    }
+    .distribution3 {
+      position: absolute;
+      top: 830px;
+      left: 36px;
+      width: 111px;
+      height: 153px;
+    }
+    .distributionName {
+      position: absolute;
+      width: auto;
+      height: auto;
+      padding: 10px 25px;
+      color: #fff;
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      border-radius: 5px;
+      background-color: rgba(0, 81, 242, 0.2);
+    }
+    .distributionName2 {
+      position: absolute;
+      width: auto;
+      height: auto;
+      padding: 10px 10px;
+      color: #fff;
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      border-radius: 5px;
+      background-color: rgba(0, 81, 242, 0.2);
+    }
+    .stlBox1 {
+      display: flex;
+      gap: 20px;
+      position: absolute;
+      top: 216px;
+      left: 254px;
+    }
+    .stlBox2 {
+      display: flex;
+      gap: 20px;
+      position: absolute;
+      top: 534px;
+      left: 254px;
+    }
+    .stlBox3 {
+      display: flex;
+      gap: 20px;
+      position: absolute;
+      top: 835px;
+      left: 254px;
+    }
+    .stlTank1,
+    .stlTank2 {
+      /* background-image: url("./img/stl.png");
+        background-repeat: no-repeat; */
+      position: relative;
+      width: 80px;
+      height: 95px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .stlTankImg {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+    }
+    @keyframes blink-effect {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .blink {
+      animation: blink-effect 1s step-end infinite;
+
+      /*
+  animation-name: blink-effect;
+  animation-duration: 1s;
+  animation-iteration-count:infinite;
+  animation-timing-function:step-end;
+  */
+    }
+    .stlTankName {
+      color: #fff;
+      width: 58px;
+      height: 25px;
+      text-align: center;
+      background: linear-gradient(
+        90deg,
+        rgba(32, 80, 105, 0) 0%,
+        rgba(2, 23, 52, 0.6) 23%,
+        rgba(2, 23, 52, 0.6) 42%,
+        rgba(32, 80, 105, 0) 100%
+      );
+      z-index: 100;
+    }
+    .stlData {
+      padding: 7px 5px;
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      border-radius: 5px;
+      background-color: rgba(0, 81, 242, 0.2);
+      color: #fff;
+      z-index: 100;
+    }
+    .intake1 {
+      position: absolute;
+      top: 85px;
+      left: 555px;
+    }
+    .intake2 {
+      position: absolute;
+      top: 395px;
+      left: 555px;
+    }
+    .intake3 {
+      position: absolute;
+      top: 695px;
+      left: 555px;
+    }
+    .intakeName {
+      width: 92px;
+      height: auto;
+      padding: 10px 2px;
+      color: #fff;
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      border-radius: 5px;
+      background-color: rgba(0, 81, 242, 0.2);
+      text-align: center;
+    }
+    .valvePump101 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 156.25px;
+      left: 818px;
+    }
+    .valvePump102 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 156.25px;
+      left: 862px;
+    }
+    .valvePump103 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 156.25px;
+      left: 906px;
+    }
+    .valvePump104 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 156.25px;
+      left: 950px;
+    }
+    .valvePump105 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 156.25px;
+      left: 994px;
+    }
+    .valvePump106 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 156.25px;
+      left: 1038px;
+    }
+    .valvePump107 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 156.25px;
+      left: 1082px;
+    }
+    .valvePump108 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 156.25px;
+      left: 1126px;
+    }
+    .valvePump109 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 779px;
+    }
+    .valvePump110 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 823px;
+    }
+    .valvePump111 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 867px;
+    }
+    .valvePump112 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 911px;
+    }
+    .valvePump113 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 955px;
+    }
+    .valvePump114 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 999px;
+    }
+    .valvePump115 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 1043px;
+    }
+    .valvePump116 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 1087px;
+    }
+    .valvePump117 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 1131px;
+    }
+    .valvePump118 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 294px;
+      left: 1175px;
+    }
+    .valvePump301 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 563px;
+    }
+    .valvePump302 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 607px;
+    }
+    .valvePump303 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 651px;
+    }
+    .valvePump304 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 695px;
+    }
+    .valvePump305 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 739px;
+    }
+    .valvePump306 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 783px;
+    }
+    .valvePump307 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 827px;
+    }
+    .valvePump308 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 871px;
+    }
+    .valvePump309 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 915px;
+    }
+    .valvePump310 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 959px;
+    }
+    .valvePump311 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 1003px;
+    }
+    .valvePump312 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 1047px;
+    }
+    .valvePump313 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 1091px;
+    }
+    .valvePump314 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 576px;
+      left: 1134px;
+    }
+    .valvePump201 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 554px;
+    }
+    .valvePump202 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 598px;
+    }
+    .valvePump203 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 642px;
+    }
+    .valvePump204 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 686px;
+    }
+    .valvePump205 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 730px;
+    }
+    .valvePump206 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 774px;
+    }
+    .valvePump207 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 818px;
+    }
+    .valvePump208 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 862px;
+    }
+    .valvePump209 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 906px;
+    }
+    .valvePump210 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 950px;
+    }
+    .valvePump211 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 994px;
+    }
+    .valvePump212 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 1038px;
+    }
+    .valvePump213 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 1082px;
+    }
+    .valvePump214 {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      top: 876px;
+      left: 1126px;
+    }
+    .valveCircleW {
+      position: absolute;
+      top: 12px;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #fff;
+    }
+    .valveCircleG {
+      position: absolute;
+      top: 12px;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #45c0bd;
+    }
+    .valveCircleY {
+      position: absolute;
+      top: 12px;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #fbe738;
+    }
+    .valveCircleR {
+      position: absolute;
+      top: 12px;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #ef5656;
+    }
+    .pumpCircleW {
+      position: absolute;
+      top: 36px;
+      left: 15.5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #fff;
+    }
+    .pumpCircleG {
+      position: absolute;
+      top: 36px;
+      left: 15.5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #45c0bd;
+    }
+    .pumpCircleY {
+      position: absolute;
+      top: 36px;
+      left: 15.5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #fbe738;
+    }
+    .pumpCircleR {
+      position: absolute;
+      top: 36px;
+      left: 15.5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: #ef5656;
+    }
+    .alarm1{
+        /* width: 80px;
+        height: 105px;
+        border: 2px solid #fbe738;
+        border-radius: 10px; */
+        mix-blend-mode: hard-light;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="elecData">
+        <div class="elecUse">
+          <div class="elecUseTitle">현재 사용 전력량</div>
+          <div class="elecUseData">34,254 kw</div>
+        </div>
+        <div class="elecAi">
+          <div class="elecAiTitle">현재 사용 전력량</div>
+          <div class="elecAiData">34,254 kw</div>
+        </div>
+      </div>
+      <div class="content1">
+        <div class="diagram1"><img src="./img/diagram1.png" alt="" /></div>
+        <div class="distribution1">
+          <img src="./img/distribution.png" alt="" />
+          <div class="distributionName">수용가</div>
+        </div>
+        <div class="stlBox1">
+          <div class="stlTank1 alarm1">
+            <img class="stlTankImg blink" src="./img/stl.png" alt="" />
+            <div class="stlTankName">STL #1</div>
+            <div class="stlData">32.56Elm</div>
+          </div>
+          <div class="stlTank2">
+            <img class="stlTankImg" src="./img/stl.png" alt="" />
+            <div class="stlTankName">STL #2</div>
+            <div class="stlData">32.56Elm</div>
+          </div>
+        </div>
+        <div class="intake1">
+          <img src="./img/rawWaterIntake.png" alt="" />
+          <div class="intakeName">팔달1(취)</div>
+        </div>
+        <div class="valvePump101">
+          <img src="./img/valve.png" alt="" />
+          <div class="valveCircleW"></div>
+          <img src="./img/pump.png" alt="" />
+          <div class="pumpCircleW"></div>
+        </div>
+        <div class="valvePump102">
+          <img src="./img/valve.png" alt="" />
+          <div class="valveCircleG"></div>
+          <img src="./img/pump.png" alt="" />
+          <div class="pumpCircleG"></div>
+        </div>
+        <div class="valvePump103">
+          <img class="blink" src="./img/valve.png" alt="" />
+          <div class="valveCircleY blink"></div>
+          <img src="./img/pump.png" alt="" />
+          <div class="pumpCircleY"></div>
+        </div>
+        <div class="valvePump104">
+          <img src="./img/valve.png" alt="" />
+          <div class="valveCircleR"></div>
+          <img src="./img/pump.png" alt="" />
+          <div class="pumpCircleR"></div>
+        </div>
+        <div class="valvePump105">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump106">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump107">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump108">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump109">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump110">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump111">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump112">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump113">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump114">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump115">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump116">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump117">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump118">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+      </div>
+      <div class="content2">
+        <div class="diagram2"><img src="./img/diagram2.png" alt="" /></div>
+        <div class="distribution2">
+          <img src="./img/pumpStation.png" alt="" />
+          <div class="distributionName2">통합가압장</div>
+        </div>
+        <div class="stlBox2">
+          <div class="stlTank1">
+            <img class="stlTankImg" src="./img/stl.png" alt="" />
+            <div class="stlTankName">STL #1</div>
+            <div class="stlData">32.56Elm</div>
+          </div>
+          <div class="stlTank2">
+            <img class="stlTankImg" src="./img/stl.png" alt="" />
+            <div class="stlTankName">STL #2</div>
+            <div class="stlData">32.56Elm</div>
+          </div>
+        </div>
+        <div class="intake2">
+          <img src="./img/rawWaterIntake.png" alt="" />
+          <div class="intakeName">팔달3(취)</div>
+        </div>
+        <div class="valvePump301">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump302">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump303">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump304">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump305">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump306">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump307">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump308">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump309">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump310">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump311">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump312">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump313">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump314">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+      </div>
+      <div class="content3">
+        <div class="diagram3"><img src="./img/diagram3.png" alt="" /></div>
+        <div class="distribution3">
+          <img src="./img/distribution.png" alt="" />
+          <div class="distributionName">수용가</div>
+        </div>
+        <div class="stlBox3">
+          <div class="stlTank1">
+            <img class="stlTankImg" src="./img/stl.png" alt="" />
+            <div class="stlTankName">STL #1</div>
+            <div class="stlData">32.56Elm</div>
+          </div>
+          <div class="stlTank2">
+            <img class="stlTankImg" src="./img/stl.png" alt="" />
+            <div class="stlTankName">STL #2</div>
+            <div class="stlData">32.56Elm</div>
+          </div>
+        </div>
+        <div class="intake3">
+          <img src="./img/rawWaterIntake.png" alt="" />
+          <div class="intakeName">팔달2(취)</div>
+        </div>
+        <div class="valvePump201">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump202">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump203">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump204">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump205">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump206">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump207">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump208">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump209">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump210">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump211">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump212">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump213">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+        <div class="valvePump214">
+          <img src="./img/valve.png" alt="" />
+          <img src="./img/pump.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
